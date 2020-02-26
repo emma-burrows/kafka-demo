@@ -1,15 +1,14 @@
 import java.io.ByteArrayInputStream
-import java.nio.charset.StandardCharsets
 import java.util
 
+import com.amazonaws.services.s3.AmazonS3Client
+import com.amazonaws.services.s3.model.ObjectMetadata
 import org.apache.kafka.clients.consumer.OffsetAndMetadata
 import org.apache.kafka.common.TopicPartition
 import org.apache.kafka.common.config.ConfigDef
 import org.apache.kafka.common.utils.AppInfoParser
 import org.apache.kafka.connect.connector.Task
 import org.apache.kafka.connect.sink.{SinkConnector, SinkRecord, SinkTask}
-import com.amazonaws.services.s3.AmazonS3Client
-import com.amazonaws.services.s3.model.ObjectMetadata
 
 import scala.collection.JavaConverters._
 
@@ -46,7 +45,7 @@ class S3Task extends SinkTask {
       println(s"Reading message ${sinkRecord.key}")
 
       val path = s"PATH/file${sinkRecord.key}.png"
-      writer.writeToS3("BUCKET-NAME", path, sinkRecord.value.asInstanceOf[Array[Byte]])
+      writer.writeToS3("test-bucket", path, sinkRecord.value.asInstanceOf[Array[Byte]])
     }
   }
 

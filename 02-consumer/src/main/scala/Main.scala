@@ -1,8 +1,6 @@
 import java.util
-
 import org.apache.kafka.clients.consumer.{ConsumerConfig, ConsumerRecord, ConsumerRecords, KafkaConsumer}
-
-import scala.collection.JavaConverters._
+import scala.jdk.CollectionConverters._
 
 object Main {
   def main(args: Array[String]) {

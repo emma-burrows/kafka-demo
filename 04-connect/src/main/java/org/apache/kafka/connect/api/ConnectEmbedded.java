@@ -67,13 +67,13 @@ public class ConnectEmbedded {
 
         //not sure if this is going to work but because we don't have advertised url we can get at least a fairly random
         String workerId = UUID.randomUUID().toString();
-        worker = new Worker(workerId, time, config, offsetBackingStore);
+        worker = new Worker(workerId, time, null, config, offsetBackingStore);
 
         StatusBackingStore statusBackingStore = new MemoryStatusBackingStore();
         statusBackingStore.configure(config);
 
         ConfigBackingStore configBackingStore = new MemoryConfigBackingStore();
-        configBackingStore.configure(config);
+//        configBackingStore.configure(config);
 
         //advertisedUrl = "" as we don't have the rest server - hopefully this will not break anything
         herder = new DistributedHerder(config, time, worker, statusBackingStore, configBackingStore, "");

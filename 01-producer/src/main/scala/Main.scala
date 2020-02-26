@@ -1,15 +1,13 @@
 import java.util
-
 import org.apache.kafka.clients.producer._
-
-import scala.collection.JavaConverters._
+import scala.jdk.CollectionConverters._
 
 object Main {
   def main(args: Array[String]) {
-    val topicName = "demo-image"
+    val topicName = args.head
     val producer = new KafkaProducer[String, Array[Byte]](config)
 
-    for(i <- 0 until 500) {
+    for(i <- 0 until 5) {
       println(s"Generating file $i")
 
       val img = new RandomImage().generateImageByteArray()

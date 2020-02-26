@@ -10,11 +10,12 @@ import scala.collection.JavaConverters._
 
 object Main {
   def main(args: Array[String]) {
+    val topicName = args.head
     val overlayImage = RandomImage.convertImageToByteArray(ImageIO.read(new File("kafka.png")))
     val overlayKeyValueMapper = new OverlayKeyValueMapper(overlayImage)
 
     val builder: KStreamBuilder = new KStreamBuilder
-    val input = builder.stream(Serdes.String(), Serdes.ByteArray(), "demo-image")
+    val input = builder.stream(Serdes.String(), Serdes.ByteArray(), topicName)
     input.map(overlayKeyValueMapper).to("demo-kafka-image")
 
     val stream: KafkaStreams = new KafkaStreams(builder, new StreamsConfig(config))
