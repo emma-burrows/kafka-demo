@@ -8,7 +8,7 @@ object Main {
     val producer = new KafkaProducer[String, Array[Byte]](config)
 
     for(i <- 0 until 5) {
-      println(s"Generating file $i")
+      println(s"Generating file $i for $topicName")
 
       val img = new RandomImage().generateImageByteArray()
       producer.send(new ProducerRecord(topicName, Integer.toString(i), img), new AckCallback(i))
